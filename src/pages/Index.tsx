@@ -9,6 +9,10 @@ import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/hero-consulting.jpg";
 import itImage from "@/assets/it-consulting.jpg";
 import managementImage from "@/assets/management-consulting.jpg";
+import gpLogo from "@/assets/gp-logo.png";
+import expertTeamIcon from "@/assets/expert-team-icon.png";
+import tailoredSolutionsIcon from "@/assets/tailored-solutions-icon.png";
+import provenResultsIcon from "@/assets/proven-results-icon.png";
 
 const Index = () => {
   const { toast } = useToast();
@@ -73,8 +77,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Logo */}
       <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-        <div className="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
-          <span className="text-2xl font-bold text-primary">GP</span>
+        <div className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center">
+          <img src={gpLogo} alt="Gemma Partners Logo" className="w-14 h-14" />
         </div>
       </div>
 
@@ -98,7 +102,9 @@ const Index = () => {
               Gemma Partners
             </span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed opacity-90">
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed opacity-90" style={{ 
+            textShadow: '1px 1px 0px rgba(0,0,0,0.3), -1px -1px 0px rgba(255,255,255,0.1), 1px -1px 0px rgba(255,255,255,0.1), -1px 1px 0px rgba(255,255,255,0.1)' 
+          }}>
             Expert IT and Management Consulting Services that Drive Growth, Innovation, and Operational Excellence
           </p>
           <div className="flex justify-center">
@@ -150,7 +156,7 @@ const Index = () => {
                 <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-start gap-3">
                     <Shield className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                    <span>Cybersecurity & Risk Management</span>
+                    <span>Mobile App Consulting</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Zap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
@@ -217,8 +223,8 @@ const Index = () => {
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center group">
-              <div className="w-20 h-20 bg-hero-gradient rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-hero transition-all duration-300">
-                <Users className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-hero-gradient rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-hero transition-all duration-300 relative overflow-hidden">
+                <img src={expertTeamIcon} alt="Expert Team" className="w-12 h-12 object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-foreground">Expert Team</h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -227,8 +233,8 @@ const Index = () => {
             </div>
             
             <div className="text-center group">
-              <div className="w-20 h-20 bg-hero-gradient rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-hero transition-all duration-300">
-                <Target className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-hero-gradient rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-hero transition-all duration-300 relative overflow-hidden">
+                <img src={tailoredSolutionsIcon} alt="Tailored Solutions" className="w-12 h-12 object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-foreground">Tailored Solutions</h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -237,8 +243,8 @@ const Index = () => {
             </div>
             
             <div className="text-center group">
-              <div className="w-20 h-20 bg-hero-gradient rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-hero transition-all duration-300">
-                <TrendingUp className="h-10 w-10 text-white" />
+              <div className="w-20 h-20 bg-hero-gradient rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-hero transition-all duration-300 relative overflow-hidden">
+                <img src={provenResultsIcon} alt="Proven Results" className="w-12 h-12 object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-foreground">Proven Results</h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -365,7 +371,7 @@ const Index = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full bg-hero-gradient hover:shadow-hero transition-all duration-300" 
+                    className="w-full text-white bg-hero-gradient hover:shadow-hero hover:bg-hero-gradient/90 transition-all duration-300" 
                     size="lg"
                   >
                     Send Message
@@ -382,12 +388,11 @@ const Index = () => {
       <footer className="bg-foreground text-background py-12">
         <div className="container mx-auto px-6">
           <div className="text-center">
-            <h3 className="text-3xl font-bold mb-4">Gemma Partners</h3>
             <p className="text-lg opacity-80 mb-6">
               Transforming businesses through expert IT and management consulting
             </p>
-            <div className="flex justify-center space-x-8 text-sm opacity-70">
-              <span>© 2024 Gemma Partners. All rights reserved.</span>
+            <div className="flex justify-center space-x-8 text-lg opacity-70">
+              <span>© 2014-2025 Gemma Partners. All rights reserved.</span>
             </div>
           </div>
         </div>
