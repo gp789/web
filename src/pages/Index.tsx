@@ -1,17 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Users, Target, TrendingUp, Shield, Zap, Globe, ArrowRight } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/hero-consulting.jpg";
 import itImage from "@/assets/it-consulting.jpg";
 import managementImage from "@/assets/management-consulting.jpg";
 
 const Index = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+
+  const scrollToContact = () => {
+    const contactSection = document.querySelector('#contact-section');
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('https://formsubmit.co/info@gemma-partners.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message,
+          _subject: 'New Contact Form Submission - Gemma Partners'
+        })
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you within 24 hours.",
+        });
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          company: '',
+          message: ''
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Logo */}
+      <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
+          <span className="text-2xl font-bold text-primary">GP</span>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-hero-gradient overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -23,7 +89,11 @@ const Index = () => {
         
         <div className="relative z-10 container mx-auto px-6 text-center text-white">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Transform Your Business with
+            <span className="text-white drop-shadow-lg" style={{ 
+              textShadow: '2px 2px 0px rgba(0,0,0,0.3), -1px -1px 0px rgba(255,255,255,0.1), 1px -1px 0px rgba(255,255,255,0.1), -1px 1px 0px rgba(255,255,255,0.1), 1px 1px 0px rgba(255,255,255,0.1)' 
+            }}>
+              Transform Your Business
+            </span>
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-primary-glow">
               Gemma Partners
             </span>
@@ -31,13 +101,15 @@ const Index = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed opacity-90">
             Expert IT and Management Consulting Services that Drive Growth, Innovation, and Operational Excellence
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-6 shadow-hero hover:shadow-xl transition-all duration-300">
-              Get Started Today
+          <div className="flex justify-center">
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="text-lg px-8 py-6 shadow-hero hover:shadow-xl transition-all duration-300"
+              onClick={scrollToContact}
+            >
+              Contact us Today
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white/20 transition-all duration-300">
-              Learn More
             </Button>
           </div>
         </div>
@@ -178,7 +250,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-24 bg-section-gradient">
+      <section id="contact-section" className="py-24 bg-section-gradient">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
@@ -199,7 +271,7 @@ const Index = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Email</h4>
-                    <p className="text-muted-foreground">contact@gemmapartners.com</p>
+                    <p className="text-muted-foreground">info@gemma-partners.com</p>
                   </div>
                 </div>
                 
@@ -209,7 +281,7 @@ const Index = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Phone</h4>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">+1 646 926 0897</p>
                   </div>
                 </div>
                 
@@ -220,8 +292,9 @@ const Index = () => {
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Office</h4>
                     <p className="text-muted-foreground">
-                      123 Business District<br />
-                      New York, NY 10001
+                      1621 Central Avenue<br />
+                      Cheyenne, WY 82001<br />
+                      United States
                     </p>
                   </div>
                 </div>
@@ -229,44 +302,77 @@ const Index = () => {
             </div>
             
             <Card className="shadow-card border-0">
-              <CardHeader>
-                <CardTitle className="text-2xl text-primary">Send us a message</CardTitle>
-                <CardDescription>
-                  We'll get back to you within 24 hours to discuss your consulting needs.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" placeholder="John" />
+              <form onSubmit={handleSubmit}>
+                <CardHeader>
+                  <CardTitle className="text-2xl text-primary">Send us a message</CardTitle>
+                  <CardDescription>
+                    We'll get back to you within 24 hours to discuss your consulting needs.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input 
+                        id="firstName" 
+                        placeholder="John" 
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange('firstName', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input 
+                        id="lastName" 
+                        placeholder="Doe" 
+                        value={formData.lastName}
+                        onChange={(e) => handleInputChange('lastName', e.target.value)}
+                        required
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" placeholder="Doe" />
+                    <Label htmlFor="email">Email</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="john@company.com" 
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="john@company.com" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="company">Company</Label>
-                  <Input id="company" placeholder="Your Company" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="Tell us about your consulting needs and how we can help..."
-                    rows={5}
-                  />
-                </div>
-                <Button className="w-full bg-hero-gradient hover:shadow-hero transition-all duration-300" size="lg">
-                  Send Message
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </CardContent>
+                  <div className="space-y-2">
+                    <Label htmlFor="company">Company</Label>
+                    <Input 
+                      id="company" 
+                      placeholder="Your Company" 
+                      value={formData.company}
+                      onChange={(e) => handleInputChange('company', e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea 
+                      id="message" 
+                      placeholder="Tell us about your consulting needs and how we can help..."
+                      rows={5}
+                      value={formData.message}
+                      onChange={(e) => handleInputChange('message', e.target.value)}
+                      required
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-hero-gradient hover:shadow-hero transition-all duration-300" 
+                    size="lg"
+                  >
+                    Send Message
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </CardContent>
+              </form>
             </Card>
           </div>
         </div>
