@@ -371,7 +371,7 @@ const Index = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full text-white bg-hero-gradient hover:shadow-hero hover:bg-hero-gradient/90 transition-all duration-300" 
+                    className="w-full text-black bg-hero-gradient hover:shadow-hero hover:bg-hero-gradient/90 transition-all duration-300" 
                     size="lg"
                   >
                     Send Message
