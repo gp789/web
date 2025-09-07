@@ -5,16 +5,21 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/gemma-partners/' : '/',
+  // 👇 Important: for GitHub Pages deployment
+  // When you deploy to https://<user>.github.io/<repo>/,
+  // "base" must be "/<repo-name>/"
+  base: mode === "production" ? "/gemma-partners/" : "/",
+
   server: {
     host: "::",
     port: 8080,
   },
+
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === "development" && componentTagger(),
   ].filter(Boolean),
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
