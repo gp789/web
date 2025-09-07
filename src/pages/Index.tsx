@@ -33,44 +33,12 @@ const Index = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    try {
-      const response = await fetch('https://formsubmit.co/info@gemma-partners.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          company: formData.company,
-          message: formData.message,
-          _subject: 'New Contact Form Submission - Gemma Partners'
-        })
-      });
-
-      if (response.ok) {
-        toast({
-          title: "Message sent successfully!",
-          description: "We'll get back to you within 24 hours.",
-        });
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          company: '',
-          message: ''
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Error sending message",
-        description: "Please try again or contact us directly.",
-        variant: "destructive"
-      });
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    // Don't prevent default - let the form submit naturally to FormSubmit.co
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you within 24 hours.",
+    });
   };
 
   return (
@@ -308,7 +276,15 @@ const Index = () => {
             </div>
             
             <Card className="shadow-card border-0">
-              <form onSubmit={handleSubmit}>
+              <form 
+                action="https://formsubmit.co/info@gemma-partners.com" 
+                method="POST"
+                onSubmit={handleSubmit}
+              >
+                {/* FormSubmit.co configuration */}
+                <input type="hidden" name="_subject" value="New Contact Form Submission - Gemma Partners" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
                 <CardHeader>
                   <CardTitle className="text-2xl text-primary">Send us a message</CardTitle>
                   <CardDescription>
@@ -319,55 +295,60 @@ const Index = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>
-                      <Input 
-                        id="firstName" 
-                        placeholder="John" 
-                        value={formData.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
-                        required
-                      />
+                       <Input 
+                         id="firstName" 
+                         name="firstName"
+                         placeholder="John" 
+                         value={formData.firstName}
+                         onChange={(e) => handleInputChange('firstName', e.target.value)}
+                         required
+                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name</Label>
-                      <Input 
-                        id="lastName" 
-                        placeholder="Doe" 
-                        value={formData.lastName}
-                        onChange={(e) => handleInputChange('lastName', e.target.value)}
-                        required
-                      />
+                       <Input 
+                         id="lastName" 
+                         name="lastName"
+                         placeholder="Doe" 
+                         value={formData.lastName}
+                         onChange={(e) => handleInputChange('lastName', e.target.value)}
+                         required
+                       />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="john@company.com" 
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      required
-                    />
+                     <Input 
+                       id="email" 
+                       name="email"
+                       type="email" 
+                       placeholder="john@company.com" 
+                       value={formData.email}
+                       onChange={(e) => handleInputChange('email', e.target.value)}
+                       required
+                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="company">Company</Label>
-                    <Input 
-                      id="company" 
-                      placeholder="Your Company" 
-                      value={formData.company}
-                      onChange={(e) => handleInputChange('company', e.target.value)}
-                    />
+                     <Input 
+                       id="company" 
+                       name="company"
+                       placeholder="Your Company" 
+                       value={formData.company}
+                       onChange={(e) => handleInputChange('company', e.target.value)}
+                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Tell us about your consulting needs and how we can help..."
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) => handleInputChange('message', e.target.value)}
-                      required
-                    />
+                     <Textarea 
+                       id="message" 
+                       name="message"
+                       placeholder="Tell us about your consulting needs and how we can help..."
+                       rows={5}
+                       value={formData.message}
+                       onChange={(e) => handleInputChange('message', e.target.value)}
+                       required
+                     />
                   </div>
                   <Button 
                     type="submit" 
