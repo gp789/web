@@ -201,15 +201,15 @@ const Index = () => {
                 <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-start gap-3">
                     <Sparkles className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                    <span>Generative AI & Copilot Integration</span>
+                    <span>RAG-based / own-content AI solutions</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Zap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                    <span>Intelligent Process Automation</span>
+                    <span>Agents / agentic process automation</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <BarChart3 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                    <span>Data Strategy & Predictive Analytics</span>
+                    <span>LLM strategy & token optimization</span>
                   </li>
                 </ul>
               </CardContent>
