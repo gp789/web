@@ -93,7 +93,7 @@ const PrivacyPolicy = () => {
             Transforming businesses through expert IT and management consulting
           </p>
           <div className="flex justify-center space-x-8 text-lg opacity-70">
-            <span>© 2014-2025 Gemma Partners. All rights reserved.</span>
+            <span>© 2014-2026 Gemma Partners. All rights reserved.</span>
           </div>
         </div>
       </footer>
