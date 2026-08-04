@@ -4,11 +4,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Users, Target, TrendingUp, Shield, Zap, Globe, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Users, Target, TrendingUp, Shield, Zap, Globe, ArrowRight, Brain, Sparkles, BarChart3, Code2, Smartphone, GitBranch } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/hero-consulting.jpg";
 import itImage from "@/assets/it-consulting.jpg";
 import managementImage from "@/assets/management-consulting.jpg";
+import aiImage from "@/assets/ai-solutions.jpg";
+import softwareImage from "@/assets/software-development.jpg";
 import gpLogo from "@/assets/gp-logo.png";
 import expertTeamIcon from "@/assets/expert-team-icon.png";
 import tailoredSolutionsIcon from "@/assets/tailored-solutions-icon.png";
@@ -173,6 +175,84 @@ const Index = () => {
                 </ul>
               </CardContent>
             </Card>
+
+            <Card className="group shadow-card hover:shadow-hero transition-all duration-500 border-0 overflow-hidden">
+              <div className="relative h-64 overflow-hidden">
+                <img 
+                  src={aiImage} 
+                  alt="AI Solutions" 
+                  loading="lazy"
+                  width={1024}
+                  height={640}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                <div className="absolute bottom-4 left-6 text-white">
+                  <Brain className="h-8 w-8 mb-2" />
+                </div>
+              </div>
+              <CardHeader className="pb-4">
+                <CardTitle className="text-2xl text-primary">AI Solutions</CardTitle>
+                <CardDescription className="text-lg">
+                  Harness artificial intelligence to automate work and unlock smarter decisions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <Sparkles className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Generative AI & Copilot Integration</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Zap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Intelligent Process Automation</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <BarChart3 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Data Strategy & Predictive Analytics</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="group shadow-card hover:shadow-hero transition-all duration-500 border-0 overflow-hidden">
+              <div className="relative h-64 overflow-hidden">
+                <img 
+                  src={softwareImage} 
+                  alt="Software Development" 
+                  loading="lazy"
+                  width={1024}
+                  height={640}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                <div className="absolute bottom-4 left-6 text-white">
+                  <Code2 className="h-8 w-8 mb-2" />
+                </div>
+              </div>
+              <CardHeader className="pb-4">
+                <CardTitle className="text-2xl text-primary">Software Development</CardTitle>
+                <CardDescription className="text-lg">
+                  Custom software built to fit your business, delivered reliably end to end
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <Code2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Web & Enterprise Applications</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Smartphone className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Mobile App Development</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <GitBranch className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                    <span>DevOps & Continuous Delivery</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -249,15 +329,6 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Phone</h4>
-                    <p className="text-muted-foreground">+1 646 926 0897</p>
-                  </div>
-                </div>
                 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
@@ -352,7 +423,7 @@ const Index = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full text-black bg-hero-gradient hover:shadow-hero hover:bg-hero-gradient/90 transition-all duration-300" 
+                    className="w-full text-primary-foreground bg-hero-gradient hover:shadow-hero hover:bg-hero-gradient/90 transition-all duration-300" 
                     size="lg"
                   >
                     Send Message
